@@ -11,6 +11,7 @@ public class controller {
     @GetMapping("/testPower")
     public String TestPower() throws Exception {
         service.power();
+        service.role();
         return "finish";
     }
 }

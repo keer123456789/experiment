@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.web3j.tuples.generated.Tuple3;
 import org.web3j.tuples.generated.Tuple4;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class Service {
             long addPowerend = System.currentTimeMillis();
             Tuple4<BigInteger, String, String, Boolean> tuple4 = user.getPowerInfoBypowerId(new BigInteger(""+i)).send();
             long select = System.currentTimeMillis();
+            logger.info("第"+i+"次操作，数据："+tuple4.getValue1().toString()+","+tuple4.getValue2()+","+tuple4.getValue3());
             Map map = new HashMap();
             map.put("add", addPowerend - addPowerStart);
             map.put("select", select - addPowerend);
@@ -54,6 +56,148 @@ public class Service {
         long selectEnd = System.currentTimeMillis();
         powerMap.put("allPowerInfo", selectEnd - selectStart);
         buildPowerExecl("./power100.xls",powerMap);
+
+
+
+        time = new ArrayList<>();
+        for (; i <= 1000; i++) {
+            ethereumUtil.UnlockAccount();
+            long addPowerStart = System.currentTimeMillis();
+            user.addPower(new BigInteger(""+i), ""+i, "bihao"+i).send();
+            long addPowerend = System.currentTimeMillis();
+            Tuple4<BigInteger, String, String, Boolean> tuple4 = user.getPowerInfoBypowerId(new BigInteger(""+i)).send();
+            long select = System.currentTimeMillis();
+            logger.info("第"+i+"次操作，数据："+tuple4.getValue1().toString()+","+tuple4.getValue2()+","+tuple4.getValue3());
+            Map map = new HashMap();
+            map.put("add", addPowerend - addPowerStart);
+            map.put("select", select - addPowerend);
+            time.add(map);
+        }
+        powerMap = new HashMap();
+        powerMap.put("data", time);
+
+
+        selectStart = System.currentTimeMillis();
+        powerid = user.getAllPowerID().send();
+        for (BigInteger a : powerid) {
+            user.getPowerInfoBypowerId(a).send();
+        }
+        selectEnd = System.currentTimeMillis();
+        powerMap.put("allPowerInfo", selectEnd - selectStart);
+        buildPowerExecl("./power1000.xls",powerMap);
+
+
+        time = new ArrayList<>();
+        for (; i <= 10000; i++) {
+            ethereumUtil.UnlockAccount();
+            long addPowerStart = System.currentTimeMillis();
+            user.addPower(new BigInteger(""+i), ""+i, "bihao"+i).send();
+            long addPowerend = System.currentTimeMillis();
+            Tuple4<BigInteger, String, String, Boolean> tuple4 = user.getPowerInfoBypowerId(new BigInteger(""+i)).send();
+            long select = System.currentTimeMillis();
+            logger.info("第"+i+"次操作，数据："+tuple4.getValue1().toString()+","+tuple4.getValue2()+","+tuple4.getValue3());
+            Map map = new HashMap();
+            map.put("add", addPowerend - addPowerStart);
+            map.put("select", select - addPowerend);
+            time.add(map);
+        }
+        powerMap = new HashMap();
+        powerMap.put("data", time);
+
+
+        selectStart = System.currentTimeMillis();
+        powerid = user.getAllPowerID().send();
+        for (BigInteger a : powerid) {
+            user.getPowerInfoBypowerId(a).send();
+        }
+        selectEnd = System.currentTimeMillis();
+        powerMap.put("allPowerInfo", selectEnd - selectStart);
+        buildPowerExecl("./power10000.xls",powerMap);
+
+
+
+    }
+
+
+    public void role() throws Exception {
+        User user = contractUtil.UserLoad();
+        int i = 1;
+        List<Map> time = new ArrayList<>();
+
+        for(;i<=100;i++){
+            long addRoleStart = System.currentTimeMillis();
+            user.createRole(new BigInteger(""+i),"root","角色"+i).send();
+            long addRoleEnd = System.currentTimeMillis();
+            Tuple3<List<BigInteger>, String, String>tuple3= user.getRoleInfo("角色"+i).send();
+            long selectEnd = System.currentTimeMillis();
+            logger.info("第"+i+"次操作，数据："+tuple3.getValue1().toString()+","+tuple3.getValue2()+","+tuple3.getValue3());
+            Map map = new HashMap();
+            map.put("add", addRoleEnd - addRoleStart);
+            map.put("select", selectEnd - addRoleEnd);
+            time.add(map);
+        }
+        Map powerMap = new HashMap();
+        powerMap.put("data", time);
+
+        long start=System.currentTimeMillis();
+        BigInteger sum=user.getRoleCount().send();
+        for(int j=1;j<=sum.intValue();j++){
+            user.getRoleInfo("角色"+i).send();
+        }
+        long end=System.currentTimeMillis();
+        powerMap.put("allPowerInfo", end - start);
+        buildPowerExecl("./role100.xls",powerMap);
+
+
+        for(;i<=1000;i++){
+            long addRoleStart = System.currentTimeMillis();
+            user.createRole(new BigInteger(""+i),"root","角色"+i).send();
+            long addRoleEnd = System.currentTimeMillis();
+            Tuple3<List<BigInteger>, String, String>tuple3= user.getRoleInfo("角色"+i).send();
+            long selectEnd = System.currentTimeMillis();
+            logger.info("第"+i+"次操作，数据："+tuple3.getValue1().toString()+","+tuple3.getValue2()+","+tuple3.getValue3());
+            Map map = new HashMap();
+            map.put("add", addRoleEnd - addRoleStart);
+            map.put("select", selectEnd - addRoleEnd);
+            time.add(map);
+        }
+        powerMap = new HashMap();
+        powerMap.put("data", time);
+
+        start=System.currentTimeMillis();
+        sum=user.getRoleCount().send();
+        for(int j=1;j<=sum.intValue();j++){
+            user.getRoleInfo("角色"+i).send();
+        }
+        end=System.currentTimeMillis();
+        powerMap.put("allPowerInfo", end - start);
+        buildPowerExecl("./role1000.xls",powerMap);
+
+
+
+        for(;i<=10000;i++){
+            long addRoleStart = System.currentTimeMillis();
+            user.createRole(new BigInteger(""+i),"root","角色"+i).send();
+            long addRoleEnd = System.currentTimeMillis();
+            Tuple3<List<BigInteger>, String, String>tuple3= user.getRoleInfo("角色"+i).send();
+            long selectEnd = System.currentTimeMillis();
+            logger.info("第"+i+"次操作，数据："+tuple3.getValue1().toString()+","+tuple3.getValue2()+","+tuple3.getValue3());
+            Map map = new HashMap();
+            map.put("add", addRoleEnd - addRoleStart);
+            map.put("select", selectEnd - addRoleEnd);
+            time.add(map);
+        }
+        powerMap = new HashMap();
+        powerMap.put("data", time);
+        start=System.currentTimeMillis();
+        sum=user.getRoleCount().send();
+        for(int j=1;j<=sum.intValue();j++){
+            user.getRoleInfo("角色"+i).send();
+        }
+        end=System.currentTimeMillis();
+        powerMap.put("allPowerInfo", end - start);
+        buildPowerExecl("./role10000.xls",powerMap);
+
 
 
     }
@@ -77,6 +221,12 @@ public class Service {
             sheet.addCell(label);
             label = new Label(1, 0, "select");
             sheet.addCell(label);
+
+            label=new Label(3,4,"allPowerInfo");
+            sheet.addCell(label);
+            label=new Label(4,4,map.get("allPowerInfo").toString());
+            sheet.addCell(label);
+
 
             for (int i = 1; i <= list.size(); i++) {
                 Label label1 = new Label(0, i, list.get(i).get("add").toString());
