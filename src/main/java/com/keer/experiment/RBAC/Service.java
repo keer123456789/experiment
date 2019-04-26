@@ -31,7 +31,7 @@ public class Service {
         User user = contractUtil.UserLoad();
         int i = 1;
         List<Map> time = new ArrayList<>();
-        for (; i <= 10; i++) {
+        for (; i <= 100; i++) {
             ethereumUtil.UnlockAccount();
             long addPowerStart = System.currentTimeMillis();
             user.addPower(new BigInteger(""+i), ""+i, "bihao"+i).send();
