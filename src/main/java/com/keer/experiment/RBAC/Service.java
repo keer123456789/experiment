@@ -31,7 +31,7 @@ public class Service {
         User user = contractUtil.UserLoad();
         int i = 1;
         List<Map> time = new ArrayList<>();
-        for (; i <= 100; i++) {
+        for (; i <= 10; i++) {
             ethereumUtil.UnlockAccount();
             long addPowerStart = System.currentTimeMillis();
             user.addPower(new BigInteger(""+i), ""+i, "bihao"+i).send();
@@ -54,7 +54,7 @@ public class Service {
             user.getPowerInfoBypowerId(a).send();
         }
         long selectEnd = System.currentTimeMillis();
-        powerMap.put("allPowerInfo", selectEnd - selectStart);
+        powerMap.put("allSelectInfo", selectEnd - selectStart);
         buildPowerExecl("./power100.xls",powerMap);
 
 
@@ -83,7 +83,7 @@ public class Service {
             user.getPowerInfoBypowerId(a).send();
         }
         selectEnd = System.currentTimeMillis();
-        powerMap.put("allPowerInfo", selectEnd - selectStart);
+        powerMap.put("allSelectInfo", selectEnd - selectStart);
         buildPowerExecl("./power1000.xls",powerMap);
 
 
@@ -111,7 +111,7 @@ public class Service {
             user.getPowerInfoBypowerId(a).send();
         }
         selectEnd = System.currentTimeMillis();
-        powerMap.put("allPowerInfo", selectEnd - selectStart);
+        powerMap.put("allSelectInfo", selectEnd - selectStart);
         buildPowerExecl("./power10000.xls",powerMap);
 
 
@@ -145,7 +145,7 @@ public class Service {
             user.getRoleInfo("角色"+i).send();
         }
         long end=System.currentTimeMillis();
-        powerMap.put("allPowerInfo", end - start);
+        powerMap.put("allSelectInfo", end - start);
         buildPowerExecl("./role100.xls",powerMap);
 
 
@@ -170,7 +170,7 @@ public class Service {
             user.getRoleInfo("角色"+i).send();
         }
         end=System.currentTimeMillis();
-        powerMap.put("allPowerInfo", end - start);
+        powerMap.put("allSelectInfo", end - start);
         buildPowerExecl("./role1000.xls",powerMap);
 
 
@@ -195,7 +195,7 @@ public class Service {
             user.getRoleInfo("角色"+i).send();
         }
         end=System.currentTimeMillis();
-        powerMap.put("allPowerInfo", end - start);
+        powerMap.put("allSelectInfo", end - start);
         buildPowerExecl("./role10000.xls",powerMap);
 
 
@@ -214,24 +214,23 @@ public class Service {
             WritableSheet sheet = writableWorkbook.createSheet("sheet1", 0);
 
             List<Map> list = (List<Map>) map.get("data");
-            Map data = list.get(0);
-            Set set = data.keySet();
+
 
             Label label = new Label(0, 0, "add");
             sheet.addCell(label);
             label = new Label(1, 0, "select");
             sheet.addCell(label);
 
-            label=new Label(3,4,"allPowerInfo");
+            label=new Label(3,4,"allSelectInfo");
             sheet.addCell(label);
-            label=new Label(4,4,map.get("allPowerInfo").toString());
+            label=new Label(4,4,map.get("allSelectInfo").toString());
             sheet.addCell(label);
 
 
             for (int i = 1; i <= list.size(); i++) {
-                Label label1 = new Label(0, i, list.get(i).get("add").toString());
+                Label label1 = new Label(0, i, list.get(i-1).get("add").toString());
                 sheet.addCell(label1);
-                label1 = new Label(1, i, list.get(i).get("select").toString());
+                label1 = new Label(1, i, list.get(i-1).get("select").toString());
                 sheet.addCell(label1);
             }
 
