@@ -1,6 +1,5 @@
-package com.keer.experiment.RBAC;
+package com.keer.experiment.RBACExperiment;
 
-import com.keer.experiment.Contract.PIG.Pig;
 import com.keer.experiment.Contract.RBAC.User;
 import com.keer.experiment.Util.ContractUtil;
 import com.keer.experiment.Util.EthereumUtil;

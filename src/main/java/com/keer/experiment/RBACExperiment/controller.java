@@ -1,4 +1,4 @@
-package com.keer.experiment.RBAC;
+package com.keer.experiment.RBACExperiment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
