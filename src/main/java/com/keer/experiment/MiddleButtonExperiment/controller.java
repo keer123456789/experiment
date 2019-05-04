@@ -14,10 +14,9 @@ public class controller {
     Service service;
 
     Map map = new HashMap();
-    @PostMapping("/testPower")
+    @PostMapping("/testPig")
     public String TestPower() throws Exception {
-        service.createPig(map);
-        service.getPigERCID(map);
+        service.pigContract();
         return "finish";
     }
 }

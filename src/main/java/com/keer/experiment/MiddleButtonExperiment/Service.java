@@ -1,10 +1,12 @@
 package com.keer.experiment.MiddleButtonExperiment;
 
+import com.keer.experiment.BDQL.BDQLUtil;
 import com.keer.experiment.BigchainDB.BigchainDBUtil;
 import com.keer.experiment.Contract.PIG.Pig;
 import com.keer.experiment.Util.ContractUtil;
 import com.keer.experiment.Util.EthereumUtil;
 import com.keer.experiment.domain.BDQL.BigchainDBData;
+import com.keer.experiment.domain.BDQL.Table;
 import com.keer.experiment.domain.ParserResult;
 import jxl.Workbook;
 import jxl.write.Label;
@@ -31,92 +33,153 @@ public class Service {
     EthereumUtil ethereumUtil;
     @Autowired
     BigchainDBUtil bigchainDBUtil;
+    @Autowired
+    MiddleButon middleButon;
+    @Autowired
+    BDQLUtil bdqlUtil;
 
 
-    public ParserResult getPigERCID(Map map) {
-        int i = 0;
-        ParserResult parserResult = new ParserResult();
-        for (;i <= 100; i++) {
-            logger.info("开始在合约创建猪，并返回721id");
-            Pig pig = contractUtil.PigLoad("0xb47d2a347736fc1e1e7102a86adae717fe63987e");
-            ethereumUtil.UnlockAccount();
-            logger.info("解锁成功！！");
-            TransactionReceipt transactionReceipt = null;
-            try {
-                transactionReceipt = pig.createPig("i",new BigInteger(""+i),new BigInteger(""+i)).send();
-                List<Pig.Log_BirthEventResponse> responses = pig.getLog_BirthEvents(transactionReceipt);
-                int tokenId = responses.get(0).tokenId.intValue();
-                parserResult.setData(tokenId + "");
-                parserResult.setStatus(ParserResult.SUCCESS);
-                parserResult.setMessage("success");
-                return parserResult;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            parserResult.setStatus(ParserResult.ERROR);
-            parserResult.setData(null);
-            parserResult.setMessage("fail");
-        }
-        return parserResult;
-    }
 
-
-    public ParserResult createPig(Map info) throws Exception {
+    public void pigContract()throws Exception{
+        Pig seller = contractUtil.PigLoad("0x9d9ac22fd504354f9933d186fb68161778a2df22");
+        Pig buyer = contractUtil.PigLoad("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb");
         int i = 0;
         List<Map> time = new ArrayList<>();
-        ParserResult parserResult = new ParserResult();
-        for (; i <= 100; i++) {
+
+
+        for (; i <= 10; i++) {
+            ethereumUtil.UnlockAccount();
+            ethereumUtil.UnlockAccount("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb","78787878");
             long createPigStart = System.currentTimeMillis();
-            BigchainDBData bigchainDBData = new BigchainDBData("pigInfo", info);
-            logger.info("要增加的猪的信息   " + info.toString());
-            String assetID;
-            try {
-                assetID = bigchainDBUtil.createAsset(bigchainDBData);
-            } catch (Exception e) {
-                parserResult.setStatus(ParserResult.ERROR);
-                parserResult.setMessage("error");
-                e.printStackTrace();
-                return parserResult;
-            }
-            logger.info("创建资产成功，资产ID：" + assetID);
-            logger.info("添加新猪成功");
-            for (; true; ) {
-                if (BigchainDBUtil.checkTransactionExit(assetID)) {
-                    break;
-                }
-            }
-
-            // 制作status表
-            Map map = new HashMap();
-            map.put("earId", i);
-            map.put("tokenId", i);
-            map.put("statu", "0");
-
-            bigchainDBData = new BigchainDBData("pigStatus", map);
-            String txID = bigchainDBUtil.transferToSelf(bigchainDBData, assetID);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            parserResult.setStatus(ParserResult.SUCCESS);
-            parserResult.setMessage("success");
+            seller.createPig("i",new BigInteger("i"),new BigInteger("i")).send();
             long createPigEnd = System.currentTimeMillis();
 
-            Map a = new HashMap();
-            a.put("createPig", createPigEnd - createPigStart);
-            time.add(a);
+            long preSaleStart = System.currentTimeMillis();
+            seller.preSale(new BigInteger("i")).send();
+            long preSaleEnd = System.currentTimeMillis();
+
+            long confirmBuyStart = System.currentTimeMillis();
+            buyer.confirmBuy(new BigInteger("i"), new BigInteger("10000000000000000000")).send();
+            long confirmBuyEnd = System.currentTimeMillis();
+
+            long transferStart = System.currentTimeMillis();
+            seller.transfer("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb",new BigInteger("i")).send();
+            long transferEnd = System.currentTimeMillis();
+
+            long changeStatusStart = System.currentTimeMillis();
+            buyer.changeStatus("0x9d9ac22fd504354f9933d186fb68161778a2df22", new BigInteger("i")).send();
+            long changeStatusEnd = System.currentTimeMillis();
+
+            Map map = new HashMap();
+            map.put("createPig", createPigEnd - createPigStart);
+            map.put("preSale", preSaleEnd - preSaleStart);
+            map.put("confirmBuy", confirmBuyEnd - confirmBuyStart);
+            map.put("transfer", transferEnd - transferStart);
+            map.put("changeStatus", changeStatusEnd - changeStatusStart);
+            time.add(map);
         }
 
-        Map createPigMap = new HashMap();
-        createPigMap.put("data", time);
-        buildPowerExecl("./createPig100.xls",createPigMap);
-        return parserResult;
+        Map pigMap = new HashMap();
+        pigMap.put("data", time);
+
+        long start=System.currentTimeMillis();
+        for(int j=1;j<=i;j++){
+            buyer.getPig(new BigInteger("i")).send();
+        }
+        long end=System.currentTimeMillis();
+        pigMap.put("getAllPigInfo", end - start);
+        buildPowerExecl("./pig10.xls",pigMap);
+
+
+        for (; i <= 100; i++) {
+            ethereumUtil.UnlockAccount();
+            ethereumUtil.UnlockAccount("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb","78787878");
+            long createPigStart = System.currentTimeMillis();
+            seller.createPig("i",new BigInteger("i"),new BigInteger("i")).send();
+            long createPigEnd = System.currentTimeMillis();
+
+            long preSaleStart = System.currentTimeMillis();
+            seller.preSale(new BigInteger("i")).send();
+            long preSaleEnd = System.currentTimeMillis();
+
+            long confirmBuyStart = System.currentTimeMillis();
+            buyer.confirmBuy(new BigInteger("i"), new BigInteger("10000000000000000000")).send();
+            long confirmBuyEnd = System.currentTimeMillis();
+
+            long transferStart = System.currentTimeMillis();
+            seller.transfer("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb",new BigInteger("i")).send();
+            long transferEnd = System.currentTimeMillis();
+
+            long changeStatuStart = System.currentTimeMillis();
+            buyer.changeStatus("0x9d9ac22fd504354f9933d186fb68161778a2df22", new BigInteger("i")).send();
+            long changeStatuEnd = System.currentTimeMillis();
+
+            Map map = new HashMap();
+            map.put("createPig", createPigEnd - createPigStart);
+            map.put("preSale", preSaleEnd - preSaleStart);
+            map.put("confirmBuy", confirmBuyEnd - confirmBuyStart);
+            map.put("transfer", transferEnd - transferStart);
+            map.put("changeStatus", changeStatuEnd - changeStatuStart);
+            time.add(map);
+        }
+
+       pigMap = new HashMap();
+        pigMap.put("data", time);
+
+        start=System.currentTimeMillis();
+        for(int j=1;j<=i;j++){
+            buyer.getPig(new BigInteger("i")).send();
+        }
+        end=System.currentTimeMillis();
+        pigMap.put("getAllPigInfo", end - start);
+        buildPowerExecl("./pig100.xls",pigMap);
+
+
+
+        for (; i <= 1000; i++) {
+            ethereumUtil.UnlockAccount();
+            ethereumUtil.UnlockAccount("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb","78787878");
+            long createPigStart = System.currentTimeMillis();
+            seller.createPig("i",new BigInteger("i"),new BigInteger("i")).send();
+            long createPigEnd = System.currentTimeMillis();
+
+            long preSaleStart = System.currentTimeMillis();
+            seller.preSale(new BigInteger("i")).send();
+            long preSaleEnd = System.currentTimeMillis();
+
+            long confirmBuyStart = System.currentTimeMillis();
+            buyer.confirmBuy(new BigInteger("i"), new BigInteger("10000000000000000000")).send();
+            long confirmBuyEnd = System.currentTimeMillis();
+
+            long transferStart = System.currentTimeMillis();
+            seller.transfer("0x2d5d11df42a9c262430db7b3415cbb01cd3301bb",new BigInteger("i")).send();
+            long transferEnd = System.currentTimeMillis();
+
+            long changeStatuStart = System.currentTimeMillis();
+            buyer.changeStatus("0x9d9ac22fd504354f9933d186fb68161778a2df22", new BigInteger("i")).send();
+            long changeStatuEnd = System.currentTimeMillis();
+
+            Map map = new HashMap();
+            map.put("createPig", createPigEnd - createPigStart);
+            map.put("preSale", preSaleEnd - preSaleStart);
+            map.put("confirmBuy", confirmBuyEnd - confirmBuyStart);
+            map.put("transfer", transferEnd - transferStart);
+            map.put("changeStatus", changeStatuEnd - changeStatuStart);
+            time.add(map);
+        }
+
+        pigMap = new HashMap();
+        pigMap.put("data", time);
+
+       start=System.currentTimeMillis();
+        for(int j=1;j<=i;j++){
+            buyer.getPig(new BigInteger("i")).send();
+        }
+        end=System.currentTimeMillis();
+        pigMap.put("getAllPigInfo", end - start);
+        buildPowerExecl("./pig1000.xls",pigMap);
+
     }
-
-
-
 
 
     private void buildPowerExecl(String path, Map map) {
@@ -133,13 +196,35 @@ public class Service {
             List<Map> list = (List<Map>) map.get("data");
 
 
-            Label label = new Label(0, 0, "add");
+            Label label = new Label(0, 0, "createPig");
+            sheet.addCell(label);
+            label = new Label(1, 0, "preSale");
+            sheet.addCell(label);
+            label = new Label(2, 0, "confirmBuy");
+            sheet.addCell(label);
+            label = new Label(3, 0, "transfer");
+            sheet.addCell(label);
+            label = new Label(4, 0, "changeStatus");
             sheet.addCell(label);
 
+
+            label=new Label(5,4,"getAllPigInfo");
+            sheet.addCell(label);
+            label=new Label(6,4,map.get("getAllPigInfo").toString());
+            sheet.addCell(label);
 
             for (int i = 1; i <= list.size(); i++) {
                 Label label1 = new Label(0, i, list.get(i-1).get("createPig").toString());
                 sheet.addCell(label1);
+                label1 = new Label(1, i, list.get(i-1).get("preSale").toString());
+                sheet.addCell(label1);
+                label1 = new Label(2, i, list.get(i-1).get("confirmBuy").toString());
+                sheet.addCell(label1);
+                label1 = new Label(3, i, list.get(i-1).get("transfer").toString());
+                sheet.addCell(label1);
+                label1 = new Label(4, i, list.get(i-1).get("changeStatus").toString());
+                sheet.addCell(label1);
+
             }
 
             writableWorkbook.write();    //写入数据
