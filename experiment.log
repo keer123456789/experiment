@@ -1,0 +1,393 @@
+2019-05-29 13:02:59.812  INFO 7896 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 7896 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
+2019-05-29 13:02:59.814  INFO 7896 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
+2019-05-29 13:03:02.238  INFO 7896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-05-29 13:03:02.257  INFO 7896 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-05-29 13:03:02.257  INFO 7896 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-05-29 13:03:02.375  INFO 7896 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-05-29 13:03:02.375  INFO 7896 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2496 ms
+2019-05-29 13:03:02.532  INFO 7896 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-05-29 13:03:02.667  INFO 7896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-05-29 13:03:02.669  INFO 7896 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 3.245 seconds (JVM running for 4.501)
+2019-05-29 13:03:34.568  INFO 7896 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-05-29 13:03:34.569  INFO 7896 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-05-29 13:03:34.572  INFO 7896 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2019-05-29 13:03:35.151  INFO 7896 --- [http-nio-8080-exec-1] com.keer.experiment.Util.FileUtil        : 文件路径不存在！！！！
+2019-05-29 13:03:35.298 ERROR 7896 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+
+java.lang.NullPointerException: null
+	at com.keer.experiment.RBACExperiment.Service.testAllFunction(Service.java:220) ~[classes/:na]
+	at com.keer.experiment.RBACExperiment.controller.testAllFunction(controller.java:20) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_161]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_161]
+
+2019-05-29 13:04:13.383  INFO 7896 --- [http-nio-8080-exec-5] com.keer.experiment.Util.FileUtil        : 文件路径不存在！！！！
+2019-05-29 13:04:13.399 ERROR 7896 --- [http-nio-8080-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+
+java.lang.NullPointerException: null
+	at com.keer.experiment.RBACExperiment.Service.testAllFunction(Service.java:220) ~[classes/:na]
+	at com.keer.experiment.RBACExperiment.controller.testAllFunction(controller.java:20) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_161]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_161]
+
+2019-05-29 13:05:20.117  INFO 2128 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 2128 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
+2019-05-29 13:05:20.120  INFO 2128 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
+2019-05-29 13:05:20.915  INFO 2128 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-05-29 13:05:20.932  INFO 2128 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-05-29 13:05:20.932  INFO 2128 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-05-29 13:05:21.058  INFO 2128 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-05-29 13:05:21.059  INFO 2128 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 901 ms
+2019-05-29 13:05:21.301  INFO 2128 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-05-29 13:05:21.461  INFO 2128 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-05-29 13:05:21.464  INFO 2128 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 1.621 seconds (JVM running for 2.912)
+2019-05-29 13:05:38.684  INFO 7248 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 7248 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
+2019-05-29 13:05:38.687  INFO 7248 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
+2019-05-29 13:05:39.489  INFO 7248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-05-29 13:05:39.507  INFO 7248 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-05-29 13:05:39.508  INFO 7248 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-05-29 13:05:39.626  INFO 7248 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-05-29 13:05:39.626  INFO 7248 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 907 ms
+2019-05-29 13:05:39.774  INFO 7248 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-05-29 13:05:39.899  INFO 7248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-05-29 13:05:39.901  INFO 7248 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 1.484 seconds (JVM running for 2.339)
+2019-05-29 13:05:45.245  INFO 7248 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-05-29 13:05:45.246  INFO 7248 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-05-29 13:05:45.249  INFO 7248 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2019-05-29 13:05:45.939 ERROR 7248 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.RuntimeException: Error processing transaction request: unknown account] with root cause
+
+java.lang.RuntimeException: Error processing transaction request: unknown account
+	at org.web3j.tx.TransactionManager.processResponse(TransactionManager.java:67) ~[core-3.4.0.jar:na]
+	at org.web3j.tx.TransactionManager.executeTransaction(TransactionManager.java:51) ~[core-3.4.0.jar:na]
+	at org.web3j.tx.ManagedTransaction.send(ManagedTransaction.java:87) ~[core-3.4.0.jar:na]
+	at org.web3j.tx.Contract.executeTransaction(Contract.java:275) ~[core-3.4.0.jar:na]
+	at org.web3j.tx.Contract.executeTransaction(Contract.java:259) ~[core-3.4.0.jar:na]
+	at org.web3j.tx.Contract.lambda$executeRemoteCallTransaction$4(Contract.java:310) ~[core-3.4.0.jar:na]
+	at org.web3j.protocol.core.RemoteCall.send(RemoteCall.java:30) ~[core-3.4.0.jar:na]
+	at com.keer.experiment.RBACExperiment.Service.testAllFunction(Service.java:220) ~[classes/:na]
+	at com.keer.experiment.RBACExperiment.controller.testAllFunction(controller.java:21) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_161]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_161]
+
+2019-05-29 13:06:31.896  INFO 18004 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 18004 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
+2019-05-29 13:06:31.899  INFO 18004 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
+2019-05-29 13:06:32.671  INFO 18004 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-05-29 13:06:32.687  INFO 18004 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-05-29 13:06:32.687  INFO 18004 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-05-29 13:06:32.818  INFO 18004 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-05-29 13:06:32.819  INFO 18004 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 888 ms
+2019-05-29 13:06:32.975  INFO 18004 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-05-29 13:06:33.102  INFO 18004 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-05-29 13:06:33.105  INFO 18004 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 1.48 seconds (JVM running for 2.428)
+2019-05-29 13:06:36.209  INFO 18004 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-05-29 13:06:36.209  INFO 18004 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-05-29 13:06:36.213  INFO 18004 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2019-05-29 13:06:53.090  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x03507d41641ede58c7ef60a1b6493417b93c4afd,数值：50000000000000000000
+2019-05-29 13:07:09.340  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xa337d762f3a43b194db3e0b354eaaeec1a84ccd4,数值：50000000000000000000
+2019-05-29 13:07:25.374  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xbeeaed51f41ec7c204cdb016ffcd7635950d9630,数值：50000000000000000000
+2019-05-29 13:07:41.805  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x6f6958e4dbf6fda17121d19d361402b090c4abb7,数值：50000000000000000000
+2019-05-29 13:07:58.012  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xcf8462b353d72da6d6270035194a5862edf1b8dc,数值：50000000000000000000
+2019-05-29 13:08:13.628  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x83d1e8ae858da4e7b6e783af7d3b89ed4bb9c205,数值：50000000000000000000
+2019-05-29 13:08:29.273  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x3ae0f7fc432561eb820bd53e8165d3a4999388d9,数值：50000000000000000000
+2019-05-29 13:08:45.559  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xb5ffaae62458c7e1e2d69b8547805fea87ccf6ed,数值：50000000000000000000
+2019-05-29 13:09:01.999  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x025b497745b0e7d0382b0571c69f579989e482cc,数值：50000000000000000000
+2019-05-29 13:09:18.273  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x106826b759f008e903cdbf25c4c3411c8c3544ba,数值：50000000000000000000
+2019-05-29 13:09:34.541  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x30d373984f84c9c985915f076db4bfed566d0ebe,数值：50000000000000000000
+2019-05-29 13:10:05.962  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xab625dd6f8ea84592686f6b87eff4a7346cbb584,数值：50000000000000000000
+2019-05-29 13:10:22.364  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0x34eda6d2daea535e5dd8860110d318245e5a877c,数值：50000000000000000000
+2019-05-29 13:10:38.657  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xb71923243a5c71938bb3bc1e87c96417014496dd,数值：50000000000000000000
+2019-05-29 13:10:54.308  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xf77bf41fded31d55585455500ea4a933c4c33dd2,数值：50000000000000000000
+2019-05-29 13:11:10.548  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xb66e65b9dadaa34a8876ae4484eb99d34ba54942,数值：50000000000000000000
+2019-05-29 13:11:26.801  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xf1118800007817850cefb20763604f53dfab1ebd,数值：50000000000000000000
+2019-05-29 13:11:43.086  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xc28c138c13a0d7cb26964f600d403ab364514517,数值：50000000000000000000
+2019-05-29 13:11:59.344  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xfa7f994f9541a16f9fa1c36d6e6ba20f41f997d9,数值：50000000000000000000
+2019-05-29 13:12:15.586  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 转账给：0xdeffead59aaab3ada506b511e4b672c275c2422d,数值：50000000000000000000
+2019-05-29 13:12:50.957  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第1次操作，数据：0,,
+2019-05-29 13:13:25.055  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第1次操作，数据：[],,
+2019-05-29 13:14:35.924  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:15:43.835  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第2次操作，数据：0,,
+2019-05-29 13:16:17.724  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第2次操作，数据：[],,
+2019-05-29 13:17:25.455  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:18:48.208  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第3次操作，数据：0,,
+2019-05-29 13:19:21.985  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第3次操作，数据：[],,
+2019-05-29 13:20:44.543  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:22:22.413  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第4次操作，数据：0,,
+2019-05-29 13:22:56.143  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第4次操作，数据：[],,
+2019-05-29 13:24:03.642  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:25:11.286  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第5次操作，数据：0,,
+2019-05-29 13:25:45.073  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第5次操作，数据：[],,
+2019-05-29 13:26:52.682  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:28:00.174  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第6次操作，数据：0,,
+2019-05-29 13:28:33.882  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第6次操作，数据：[],,
+2019-05-29 13:29:41.312  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:30:48.801  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第7次操作，数据：0,,
+2019-05-29 13:31:22.579  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第7次操作，数据：[],,
+2019-05-29 13:32:30.091  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:33:37.442  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第8次操作，数据：0,,
+2019-05-29 13:34:11.128  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第8次操作，数据：[],,
+2019-05-29 13:35:18.806  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:36:40.772  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第9次操作，数据：0,,
+2019-05-29 13:37:14.423  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第9次操作，数据：[],,
+2019-05-29 13:38:36.876  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:39:59.399  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第10次操作，数据：0,,
+2019-05-29 13:40:33.168  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第10次操作，数据：[],,
+2019-05-29 13:41:40.889  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:43:03.400  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第11次操作，数据：0,,
+2019-05-29 13:43:37.217  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第11次操作，数据：[],,
+2019-05-29 13:44:45.003  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:46:22.661  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第12次操作，数据：0,,
+2019-05-29 13:46:56.546  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第12次操作，数据：[],,
+2019-05-29 13:48:04.162  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:49:11.617  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第13次操作，数据：0,,
+2019-05-29 13:49:45.680  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第13次操作，数据：[],,
+2019-05-29 13:50:53.106  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:52:00.643  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第14次操作，数据：0,,
+2019-05-29 13:52:34.472  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第14次操作，数据：[],,
+2019-05-29 13:53:41.951  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:55:04.449  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第15次操作，数据：0,,
+2019-05-29 13:55:38.238  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第15次操作，数据：[],,
+2019-05-29 13:56:45.929  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 13:57:54.008  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第16次操作，数据：0,,
+2019-05-29 13:58:28.092  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第16次操作，数据：[],,
+2019-05-29 13:59:36.693  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:00:44.672  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第17次操作，数据：0,,
+2019-05-29 14:01:18.538  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第17次操作，数据：[],,
+2019-05-29 14:02:25.922  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:03:33.134  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第18次操作，数据：0,,
+2019-05-29 14:04:22.099  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第18次操作，数据：[],,
+2019-05-29 14:05:44.607  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:06:52.353  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第19次操作，数据：0,,
+2019-05-29 14:07:26.376  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第19次操作，数据：[],,
+2019-05-29 14:08:33.767  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:09:41.471  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第20次操作，数据：21,2,test21
+2019-05-29 14:10:15.178  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第20次操作，数据：[],,
+2019-05-29 14:11:22.911  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:11:55.726  INFO 18004 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 成功写入文件，请前往查看文件！
+2019-05-29 14:19:10.573  INFO 18468 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 18468 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
+2019-05-29 14:19:10.574  INFO 18468 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
+2019-05-29 14:19:11.805  INFO 18468 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-05-29 14:19:11.821  INFO 18468 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-05-29 14:19:11.821  INFO 18468 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-05-29 14:19:11.961  INFO 18468 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-05-29 14:19:11.961  INFO 18468 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1374 ms
+2019-05-29 14:19:12.165  INFO 18468 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-05-29 14:19:12.321  INFO 18468 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-05-29 14:19:12.321  INFO 18468 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 1.984 seconds (JVM running for 2.937)
+2019-05-29 14:19:27.053  INFO 18468 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-05-29 14:19:27.053  INFO 18468 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-05-29 14:19:27.057  INFO 18468 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2019-05-29 14:20:02.594  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第1次操作，数据：2,2,test2
+2019-05-29 14:20:36.391  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第1次操作，数据：[],,
+2019-05-29 14:21:58.972  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:23:06.576  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第2次操作，数据：3,3,test3
+2019-05-29 14:23:40.417  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第2次操作，数据：[],,
+2019-05-29 14:25:02.929  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:26:40.420  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第3次操作，数据：4,4,test4
+2019-05-29 14:27:14.164  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第3次操作，数据：[],,
+2019-05-29 14:28:36.837  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:29:44.398  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第4次操作，数据：5,5,test5
+2019-05-29 14:30:33.272  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第4次操作，数据：[],,
+2019-05-29 14:31:40.921  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:33:03.463  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第5次操作，数据：6,6,test6
+2019-05-29 14:33:52.307  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第5次操作，数据：[],,
+2019-05-29 14:34:59.927  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:36:07.217  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第6次操作，数据：7,7,test7
+2019-05-29 14:36:40.933  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第6次操作，数据：[],,
+2019-05-29 14:37:48.680  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:39:11.359  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第7次操作，数据：8,8,test8
+2019-05-29 14:39:45.108  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第7次操作，数据：[],,
+2019-05-29 14:41:22.694  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:42:45.218  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第8次操作，数据：9,9,test9
+2019-05-29 14:43:34.001  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第8次操作，数据：[],,
+2019-05-29 14:44:41.602  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:46:04.405  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第9次操作，数据：10,10,test10
+2019-05-29 14:46:53.271  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第9次操作，数据：[],,
+2019-05-29 14:48:15.967  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:49:23.549  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第10次操作，数据：11,11,test11
+2019-05-29 14:49:57.240  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第10次操作，数据：[],,
+2019-05-29 14:51:34.760  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:52:42.657  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第11次操作，数据：12,12,test12
+2019-05-29 14:53:16.574  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第11次操作，数据：[],,
+2019-05-29 14:54:39.162  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:56:01.908  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第12次操作，数据：13,13,test13
+2019-05-29 14:56:35.693  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第12次操作，数据：[],,
+2019-05-29 14:57:43.351  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 14:59:05.734  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第13次操作，数据：14,14,test14
+2019-05-29 14:59:39.533  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第13次操作，数据：[],,
+2019-05-29 15:01:17.132  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:02:54.754  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第14次操作，数据：15,15,test15
+2019-05-29 15:03:28.629  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第14次操作，数据：[],,
+2019-05-29 15:05:21.394  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:06:59.012  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第15次操作，数据：16,16,test16
+2019-05-29 15:08:02.872  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第15次操作，数据：[],,
+2019-05-29 15:09:25.645  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:10:48.116  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第16次操作，数据：17,17,test17
+2019-05-29 15:11:21.903  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第16次操作，数据：[],,
+2019-05-29 15:12:29.486  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:14:07.259  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第17次操作，数据：18,18,test18
+2019-05-29 15:14:40.961  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第17次操作，数据：[],,
+2019-05-29 15:15:48.485  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:17:11.030  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第18次操作，数据：19,19,test19
+2019-05-29 15:17:44.839  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第18次操作，数据：[],,
+2019-05-29 15:19:07.380  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:21:00.092  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第19次操作，数据：20,20,test20
+2019-05-29 15:21:48.905  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第19次操作，数据：[],,
+2019-05-29 15:22:56.424  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:24:33.928  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第20次操作，数据：21,21,test21
+2019-05-29 15:25:22.976  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 第20次操作，数据：[],,
+2019-05-29 15:27:00.624  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 查询用户信息：Tuple5{value1=, value2=, value3=, value4=0x0000000000000000000000000000000000000000, value5=0}
+2019-05-29 15:28:03.315  INFO 18468 --- [http-nio-8080-exec-1] c.k.experiment.RBACExperiment.Service    : 成功写入文件，请前往查看文件！

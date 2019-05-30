@@ -103,7 +103,7 @@ public class EthereumUtil {
         Admin web3j = Admin.build(new HttpService(web3_url));
         PersonalUnlockAccount personalUnlockAccount=null;
         try {
-            personalUnlockAccount=web3j.personalUnlockAccount(from,"78787878").send();
+            personalUnlockAccount=web3j.personalUnlockAccount(from,"12345678").send();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,11 +118,11 @@ public class EthereumUtil {
      */
     public boolean sendTransaction(String to){
         Admin web3j = new JsonRpc2_0Admin(new HttpService(web3_url));
-        UnlockAccount(from,"11111111");
+        UnlockAccount(from,"12345678");
         BigInteger value = Convert.toWei("10.0", Convert.Unit.ETHER).toBigInteger();
         Transaction transaction=  Transaction.createEtherTransaction(from,Transaction.DEFAULT_GAS,Transaction.DEFAULT_GAS ,Transaction.DEFAULT_GAS,to,value);
         try {
-            EthSendTransaction ethSendTransaction=web3j.personalSendTransaction(transaction,"11111111").send();
+            EthSendTransaction ethSendTransaction=web3j.personalSendTransaction(transaction,"12345678").send();
             String hash=ethSendTransaction.getTransactionHash();
             if(!hash.equals(null)){
                 return true;
