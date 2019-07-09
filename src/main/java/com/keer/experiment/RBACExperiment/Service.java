@@ -212,12 +212,12 @@ public class Service {
     }
 
 
-    public void testAllFunction() throws Exception {
+    public void testAllFunction(int total) throws Exception {
         User user = contractUtil.UserLoad();
 
         List<String> accounts = new ArrayList<>();
 
-        for (int j = 0; j < 20; j++) {
+        for (int j = 0; j < total; j++) {
             String address = ethereumUtil.createNewAccount("12345678");
             logger.info("创建第"+j+"个账号："+address);
             accounts.add(address);
@@ -229,7 +229,7 @@ public class Service {
 
 
         List<Map> time = new ArrayList<>();
-        for (int i = 2; i < 22; i++) {
+        for (int i = 2; i < (total+2); i++) {
             User user1 = contractUtil.UserLoad(accounts.get(i - 2).toString());
             Map map = new HashMap();
 
