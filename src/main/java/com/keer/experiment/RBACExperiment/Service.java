@@ -5,7 +5,6 @@ import com.keer.experiment.Contract.RBAC.User;
 import com.keer.experiment.Util.ContractUtil;
 import com.keer.experiment.Util.EthereumUtil;
 import com.keer.experiment.Util.FileUtil;
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
@@ -14,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tuples.generated.Tuple3;
@@ -26,8 +24,8 @@ import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 import org.web3j.utils.Convert;
 
+
 import java.io.File;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -217,20 +215,22 @@ public class Service {
     public void testAllFunction() throws Exception {
         User user = contractUtil.UserLoad();
 
-        String accounts = fileUtil.readFile("./accounts.json");
-        List address = JSONObject.parseArray(accounts);
+        List<String> accounts = new ArrayList<>();
 
         for (int j = 0; j < 20; j++) {
+            String address = ethereumUtil.createNewAccount("12345678");
+            logger.info("创建第"+j+"个账号："+address);
+            accounts.add(address);
             ethereumUtil.UnlockAccount();
             BigInteger value = Convert.toWei("50.0", Convert.Unit.ETHER).toBigInteger();
-            user.transfer(address.get(j).toString(), value).send();
-            logger.info("循环第"+j+"次，转账给：" + address.get(j).toString() + ",数值：" + value.toString());
+            user.transfer(address, value).send();
+            logger.info("循环第" + j + "次，转账给：" + address + ",数值：" + value.toString());
         }
 
 
         List<Map> time = new ArrayList<>();
         for (int i = 2; i < 22; i++) {
-            User user1 = contractUtil.UserLoad(address.get(i - 2).toString());
+            User user1 = contractUtil.UserLoad(accounts.get(i - 2).toString());
             Map map = new HashMap();
 
             ethereumUtil.UnlockAccount();
@@ -278,7 +278,7 @@ public class Service {
             map.put("getRoleInfo", end - start);
             logger.info("第" + (i - 1) + "次操作，数据：" + tuple3.getValue1().toString() + "," + tuple3.getValue2() + "," + tuple3.getValue3());
 
-            ethereumUtil.UnlockAccount(address.get(i - 2).toString(), "12345678");
+            ethereumUtil.UnlockAccount(accounts.get(i - 2).toString(), "12345678");
             start = System.currentTimeMillis();
             user1.registerUser("" + i, "15110074528@163.com").send();
             end = System.currentTimeMillis();
@@ -286,25 +286,25 @@ public class Service {
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.enroll(address.get(i - 2).toString(), "roleName" + i, "admin").send();
+            user.enroll(accounts.get(i - 2).toString(), "roleName" + i, "admin").send();
             end = System.currentTimeMillis();
             map.put("enrollUser", end - start);
 
 //            ethereumUtil.UnlockAccount();
 //            start = System.currentTimeMillis();
-//            user.changeEmail(address.get(i - 2).toString(), "1073441240@qq.com");
+//            user.changeEmail(accounts.get(i - 2).toString(), "1073441240@qq.com");
 //            end = System.currentTimeMillis();
 //            map.put("changeEmail", end - start);
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.changeRoleName(address.get(i - 2).toString(), "root").send();
+            user.changeRoleName(accounts.get(i - 2).toString(), "root").send();
             end = System.currentTimeMillis();
             map.put("changeUserRole", end - start);
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.changeUserId(address.get(i - 2).toString(), "userName" + i).send();
+            user.changeUserId(accounts.get(i - 2).toString(), "userName" + i).send();
             end = System.currentTimeMillis();
             map.put("changeUserId", end - start);
             Thread.sleep(5000);
@@ -324,25 +324,23 @@ public class Service {
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.deleteUser(address.get(i - 2).toString()).send();
+            user.deleteUser(accounts.get(i - 2).toString()).send();
             end = System.currentTimeMillis();
             map.put("deleteUser", end - start);
 
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            List list=user.getPower("userName" + i).send();
+            List list = user.getPower("userName" + i).send();
             end = System.currentTimeMillis();
             map.put("getPermissionByUserId", end - start);
-            logger.info("用户：userName"+i+"的权限："+list.toString());
-            logger.info("第"+(i-1)+"次循环结束");
-
-
+            logger.info("用户：userName" + i + "的权限：" + list.toString());
+            logger.info("第" + (i - 1) + "次循环结束");
 
 
             time.add(map);
         }
-
+        logger.info(time.toString());
         buildTestAllFunction("./TestAllFunction.xls", time);
     }
 
@@ -363,8 +361,6 @@ public class Service {
             label = new Label(1, 0, "changePermissionInfo");
             sheet.addCell(label);
 
-            label = new Label(2, 0, "changePowerName");
-            sheet.addCell(label);
 
             label = new Label(3, 0, "getPermissionInfo");
             sheet.addCell(label);
@@ -384,8 +380,6 @@ public class Service {
             label = new Label(8, 0, "enrollUser");
             sheet.addCell(label);
 
-            label = new Label(9, 0, "changeEmail");
-            sheet.addCell(label);
 
             label = new Label(10, 0, "changeUserRole");
             sheet.addCell(label);
@@ -402,7 +396,7 @@ public class Service {
             label = new Label(14, 0, "deleteUser");
             sheet.addCell(label);
 
-            label=new Label(15,0,"getPermissionByUserId");
+            label = new Label(15, 0, "getPermissionByUserId");
             sheet.addCell(label);
 
             for (int i = 0; i < list.size(); i++) {
@@ -411,8 +405,7 @@ public class Service {
                 sheet.addCell(label);
                 label = new Label(1, i + 1, map.get("changePermissionInfo").toString());
                 sheet.addCell(label);
-                label = new Label(2, i + 1, map.get("changePowerName").toString());
-                sheet.addCell(label);
+
                 label = new Label(3, i + 1, map.get("getPermissionInfo").toString());
                 sheet.addCell(label);
                 label = new Label(4, i + 1, map.get("addRole").toString());
@@ -425,8 +418,7 @@ public class Service {
                 sheet.addCell(label);
                 label = new Label(8, i + 1, map.get("enrollUser").toString());
                 sheet.addCell(label);
-                label = new Label(9, i + 1, map.get("changeEmail").toString());
-                sheet.addCell(label);
+
                 label = new Label(10, i + 1, map.get("changeUserRole").toString());
                 sheet.addCell(label);
                 label = new Label(11, i + 1, map.get("changeUserId").toString());
@@ -437,7 +429,7 @@ public class Service {
                 sheet.addCell(label);
                 label = new Label(14, i + 1, map.get("deleteUser").toString());
                 sheet.addCell(label);
-                label=new Label(15,i+1,map.get("getPermissionByUserId").toString());
+                label = new Label(15, i + 1, map.get("getPermissionByUserId").toString());
                 sheet.addCell(label);
             }
             writableWorkbook.write();    //写入数据
@@ -492,17 +484,16 @@ public class Service {
 
     public static void main(String[] args) throws Exception {
 
-        Web3j web3j = Web3j.build(new HttpService("http://127.0.0.1:8545"));
-        TransactionManager clientTransactionManager = new ClientTransactionManager(web3j, "0x8c72c612BE28d6663676fd7D191171bFa3DDf8C3");
+        Web3j web3j = Web3j.build(new HttpService("http://192.168.1.115:8545"));
+        TransactionManager clientTransactionManager = new ClientTransactionManager(web3j, "0x09c448ddc837817d0a9e2d2212056a66ac710c6e");
         ContractGasProvider contractGasProvider = new DefaultGasProvider();
-        User user=User.load("0x5e9525F8733914fd600c2CA8651F29f672804d67", web3j, clientTransactionManager, contractGasProvider.getGasPrice(), contractGasProvider.getGasLimit());
-
-        Tuple3<List<BigInteger>, String, String> tuple3 = user.getRoleInfo("root").send();
-        logger.info(tuple3.toString());
-        Tuple5<String, String, String, String, BigInteger> tuple5 = user.getUserInfo("admin").send();
-        logger.info(tuple5.toString());
-        List list=user.getPower("admin").send();
-        logger.info(list.toString());
-
+        User user = User.load("0x39c25682cd21b304c0bcafb93a07eb2ce324a014", web3j, clientTransactionManager, contractGasProvider.getGasPrice(), contractGasProvider.getGasLimit());
+        for (int i = 0; i < 20; i++) {
+            long start = System.currentTimeMillis();
+            List list = user.getPower("admin").send();
+            long end = System.currentTimeMillis();
+            logger.info(list.toString());
+            logger.info("第" + i + "次操作时间：" + (end - start));
+        }
     }
 }

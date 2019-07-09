@@ -40,7 +40,8 @@ public class EthereumUtil {
     @Value("${account_address}")
     private String from;
 
-    private Logger logger= LoggerFactory.getLogger(EthereumUtil.class);
+    private Logger logger = LoggerFactory.getLogger(EthereumUtil.class);
+
     /**
      * 创建新用户
      *
@@ -61,6 +62,7 @@ public class EthereumUtil {
 
     /**
      * 获得系统内的所有用户地址
+     *
      * @return
      */
     public List<String> getAllAccount() {
@@ -77,19 +79,20 @@ public class EthereumUtil {
 
     /**
      * 解锁账户
+     *
      * @param address
      * @param password
      * @return
      */
-    public Boolean UnlockAccount(String address,String password){
+    public Boolean UnlockAccount(String address, String password) {
         Admin web3j = Admin.build(new HttpService(web3_url));
-        PersonalUnlockAccount personalUnlockAccount=null;
+        PersonalUnlockAccount personalUnlockAccount = null;
         try {
-            personalUnlockAccount=web3j.personalUnlockAccount(address,password).send();
+            personalUnlockAccount = web3j.personalUnlockAccount(address, password).send();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(personalUnlockAccount.accountUnlocked()==null){
+        if (personalUnlockAccount.accountUnlocked() == null) {
             return true;
         }
         return personalUnlockAccount.accountUnlocked();
@@ -97,37 +100,39 @@ public class EthereumUtil {
 
     /**
      * 解锁管理员账户
+     *
      * @return
      */
-    public Boolean UnlockAccount(){
+    public Boolean UnlockAccount() {
         Admin web3j = Admin.build(new HttpService(web3_url));
-        PersonalUnlockAccount personalUnlockAccount=null;
+        PersonalUnlockAccount personalUnlockAccount = null;
         try {
-            personalUnlockAccount=web3j.personalUnlockAccount(from,"12345678").send();
+            personalUnlockAccount = web3j.personalUnlockAccount(from, "12345678").send();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(personalUnlockAccount.accountUnlocked()==null){
+        if (personalUnlockAccount.accountUnlocked() == null) {
             return true;
         }
         return personalUnlockAccount.accountUnlocked();
     }
+
     /**
      * 新账户转账100eth
+     *
      * @param to
      */
-    public boolean sendTransaction(String to){
+    public boolean sendTransaction(String to) {
         Admin web3j = new JsonRpc2_0Admin(new HttpService(web3_url));
-        UnlockAccount(from,"12345678");
+        UnlockAccount(from, "12345678");
         BigInteger value = Convert.toWei("10.0", Convert.Unit.ETHER).toBigInteger();
-        Transaction transaction=  Transaction.createEtherTransaction(from,Transaction.DEFAULT_GAS,Transaction.DEFAULT_GAS ,Transaction.DEFAULT_GAS,to,value);
+        Transaction transaction = Transaction.createEtherTransaction(from, Transaction.DEFAULT_GAS, Transaction.DEFAULT_GAS, Transaction.DEFAULT_GAS, to, value);
         try {
-            EthSendTransaction ethSendTransaction=web3j.personalSendTransaction(transaction,"12345678").send();
-            String hash=ethSendTransaction.getTransactionHash();
-            if(!hash.equals(null)){
+            EthSendTransaction ethSendTransaction = web3j.personalSendTransaction(transaction, "12345678").send();
+            String hash = ethSendTransaction.getTransactionHash();
+            if (!hash.equals(null)) {
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
         } catch (IOException e) {
@@ -138,60 +143,62 @@ public class EthereumUtil {
 
     /**
      * 获取地址的余额
+     *
      * @param address
      * @return
      */
-    public String  getBlance(String address){
-        Web3j web3j=new JsonRpc2_0Web3j(new HttpService(web3_url));
+    public String getBlance(String address) {
+        Web3j web3j = new JsonRpc2_0Web3j(new HttpService(web3_url));
         try {
-            EthGetBalance ethGetBalance=web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
-            BigInteger balance=ethGetBalance.getBalance();
+            EthGetBalance ethGetBalance = web3j.ethGetBalance(address, DefaultBlockParameterName.LATEST).send();
+            BigInteger balance = ethGetBalance.getBalance();
 
-            balance=balance.divide(new BigInteger("1000000000000000000"));
-            logger.info("获取地址为："+address+"的余额成功，余额为："+balance);
+            balance = balance.divide(new BigInteger("1000000000000000000"));
+            logger.info("获取地址为：" + address + "的余额成功，余额为：" + balance);
             return balance.toString();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.error("获取地址为"+address+"的余额失败！");
+            logger.error("获取地址为" + address + "的余额失败！");
             return null;
         }
     }
 
     /**
      * 停止挖矿
+     *
      * @return
      */
-    public boolean minerStop(){
-        Map map=new HashMap<>();
-        map.put("jsonrpc","2.0");
-        map.put("method","miner_stop");
-        map.put("params",new ArrayList<>());
-        map.put("id",74);
-        String json= JSON.toJSONString(map);
-        String resp=HttpUtil.httpPost(web3_url,json);
-        Map map1= (Map) JSON.parse(resp);
+    public boolean minerStop() {
+        Map map = new HashMap<>();
+        map.put("jsonrpc", "2.0");
+        map.put("method", "miner_stop");
+        map.put("params", new ArrayList<>());
+        map.put("id", 74);
+        String json = JSON.toJSONString(map);
+        String resp = HttpUtil.httpPost(web3_url, json);
+        Map map1 = (Map) JSON.parse(resp);
         return (boolean) map1.get("result");
     }
 
     /**
      * 开始挖矿
+     *
      * @return
      */
-    public boolean minerStart(){
-        List list=new ArrayList();
+    public boolean minerStart() {
+        List list = new ArrayList();
         list.add(1);
-        Map map=new HashMap<>();
-        map.put("jsonrpc","2.0");
-        map.put("method","miner_start");
-        map.put("params",list);
-        map.put("id",74);
-        String json= JSON.toJSONString(map);
-        String resp=HttpUtil.httpPost(web3_url,json);
-        Map map1= (Map) JSON.parse(resp);
-        if(!map1.containsValue("result")){
+        Map map = new HashMap<>();
+        map.put("jsonrpc", "2.0");
+        map.put("method", "miner_start");
+        map.put("params", list);
+        map.put("id", 74);
+        String json = JSON.toJSONString(map);
+        String resp = HttpUtil.httpPost(web3_url, json);
+        Map map1 = (Map) JSON.parse(resp);
+        if (!map1.containsValue("result")) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }

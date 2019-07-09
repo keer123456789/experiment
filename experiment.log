@@ -1,80 +1,33 @@
-2019-05-30 12:50:29.996  INFO 20120 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 20120 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
-2019-05-30 12:50:30.000  INFO 20120 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
-2019-05-30 12:50:32.432  INFO 20120 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-05-30 12:50:32.453  INFO 20120 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-05-30 12:50:32.453  INFO 20120 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
-2019-05-30 12:50:32.607  INFO 20120 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-05-30 12:50:32.607  INFO 20120 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2524 ms
-2019-05-30 12:50:32.818  INFO 20120 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-05-30 12:50:32.987  INFO 20120 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-05-30 12:50:32.990  INFO 20120 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 3.473 seconds (JVM running for 4.924)
-2019-05-30 12:51:17.239  INFO 20120 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-05-30 12:51:17.239  INFO 20120 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-05-30 12:51:17.243  INFO 20120 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2019-05-30 12:52:23.370 ERROR 20120 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.RuntimeException: Error processing transaction request: unknown account] with root cause
-
-java.lang.RuntimeException: Error processing transaction request: unknown account
-	at org.web3j.tx.TransactionManager.processResponse(TransactionManager.java:67) ~[core-3.4.0.jar:na]
-	at org.web3j.tx.TransactionManager.executeTransaction(TransactionManager.java:51) ~[core-3.4.0.jar:na]
-	at org.web3j.tx.ManagedTransaction.send(ManagedTransaction.java:87) ~[core-3.4.0.jar:na]
-	at org.web3j.tx.Contract.executeTransaction(Contract.java:275) ~[core-3.4.0.jar:na]
-	at org.web3j.tx.Contract.executeTransaction(Contract.java:259) ~[core-3.4.0.jar:na]
-	at org.web3j.tx.Contract.lambda$executeRemoteCallTransaction$4(Contract.java:310) ~[core-3.4.0.jar:na]
-	at org.web3j.protocol.core.RemoteCall.send(RemoteCall.java:30) ~[core-3.4.0.jar:na]
-	at com.keer.experiment.RBACExperiment.Service.testAllFunction(Service.java:226) ~[classes/:na]
-	at com.keer.experiment.RBACExperiment.controller.testAllFunction(controller.java:21) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_161]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_161]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.17.jar:9.0.17]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_161]
-
+2019-07-09 18:12:17.217  INFO 14192 --- [main] c.keer.experiment.ExperimentApplication  : Starting ExperimentApplication on DESKTOP-MCBQJGQ with PID 14192 (E:\code\java\experiment\target\classes started by keer in E:\code\java\experiment)
+2019-07-09 18:12:17.220  INFO 14192 --- [main] c.keer.experiment.ExperimentApplication  : No active profile set, falling back to default profiles: default
+2019-07-09 18:12:18.278  INFO 14192 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-07-09 18:12:18.321  INFO 14192 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 18:12:18.321  INFO 14192 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2019-07-09 18:12:18.451  INFO 14192 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 18:12:18.451  INFO 14192 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1203 ms
+2019-07-09 18:12:18.611  INFO 14192 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 18:12:18.740  INFO 14192 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-07-09 18:12:18.742  INFO 14192 --- [main] c.keer.experiment.ExperimentApplication  : Started ExperimentApplication in 1.854 seconds (JVM running for 2.9)
+2019-07-09 18:12:51.278  INFO 14192 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 18:12:51.279  INFO 14192 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 18:12:51.282  INFO 14192 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2019-07-09 18:12:52.842  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号0:0xc55a0470c1ef456493e06d2ac5b050f99795488e
+2019-07-09 18:12:53.836  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号1:0x69f432194057446e85f234a90df3efbbd0ddd623
+2019-07-09 18:12:54.829  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号2:0xd264cdb9fd4513d686e7d43bf8a8e63b3f351aee
+2019-07-09 18:12:55.652  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号3:0xb2e8f70f29603b3d870e98dabce4922999b453b1
+2019-07-09 18:12:56.312  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号4:0x08b17228ab4bceec0cfefa2b3251e7ed08b59170
+2019-07-09 18:12:56.908  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号5:0x06ea6d46141465e457c45b69cc332b7dbd0f9b72
+2019-07-09 18:12:57.526  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号6:0x6924ca09f40d8a3cbc9ffb6cbbce706d880d7356
+2019-07-09 18:12:58.142  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号7:0x0a4d936e525ee1c3f9cd516a0bbda0adb379df4f
+2019-07-09 18:12:58.761  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号8:0x739f4d2238ddb23f3ee2d71bcbfb4657efa4fc2a
+2019-07-09 18:12:59.369  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号9:0x4fc978bca47bdea1d9325e82f056f73ab39edf3a
+2019-07-09 18:12:59.990  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号10:0xf89970647497183c414da9d8096ec214ceeac4c8
+2019-07-09 18:13:00.597  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号11:0xb7d92b3f2ccf3c3c29aad79398ab8401140bb7bd
+2019-07-09 18:13:01.194  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号12:0x111f5a2c91dbe0cfa4da24e243bf8636023b18fe
+2019-07-09 18:13:01.791  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号13:0x0ed162bd149f4619fc0102dd765da0586ab2cb89
+2019-07-09 18:13:02.390  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号14:0x2704a8034a1a4469ff68713ae94196bf330b0c5e
+2019-07-09 18:13:03.098  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号15:0xc5ff7fe6a95afbc6eead87ae50e779b615e1c574
+2019-07-09 18:13:03.698  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号16:0x49f7cfbeceba626fa1bd2edbc68cf79a0479bfe7
+2019-07-09 18:13:04.317  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号17:0xb96eaa178c9f7d6e033e8617a304bbc96d0aa199
+2019-07-09 18:13:04.928  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号18:0x21c5ed9b768f71cc43a92d205f622cac935ff459
+2019-07-09 18:13:05.540  INFO 14192 --- [http-nio-8080-exec-1] c.k.e.RBACExperiment.controller          : 账号19:0x55deb9d957f4a671a47c3ab5886a62f77d61beb1
