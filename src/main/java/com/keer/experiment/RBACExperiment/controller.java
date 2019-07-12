@@ -31,4 +31,9 @@ public class controller {
         service.testAllFunction(total);
         return "finish";
     }
+    @GetMapping("/testAllFunctionByAllView/{total}")
+    public String testAllFunctionByAllView(@PathVariable int total) throws Exception {
+        service.testAllFunctionByAllView(total);
+        return "finish";
+    }
 }

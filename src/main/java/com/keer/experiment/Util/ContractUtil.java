@@ -2,7 +2,8 @@ package com.keer.experiment.Util;
 
 
 import com.keer.experiment.Contract.PIG.Pig;
-import com.keer.experiment.Contract.RBAC.User;
+import com.keer.experiment.Contract.RBAC.allView.UserAllView;
+import com.keer.experiment.Contract.RBAC.solidity.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.web3j.protocol.Web3j;
@@ -59,6 +60,19 @@ public class ContractUtil {
         return  User.load(User_address,web3j,clientTransactionManager,contractGasProvider.getGasPrice(),contractGasProvider.getGasLimit());
     }
 
+    public UserAllView UserAllViewLoad(){
+        Web3j web3j=Web3j.build(new HttpService(web3_url));
+        TransactionManager clientTransactionManager=new ClientTransactionManager(web3j,account_address) ;
+        ContractGasProvider contractGasProvider=new DefaultGasProvider();
+        return  UserAllView.load(User_address,web3j,clientTransactionManager,contractGasProvider.getGasPrice(),contractGasProvider.getGasLimit());
+    }
+
+    public UserAllView UserAllViewLoad(String accountaddress){
+        Web3j web3j=Web3j.build(new HttpService(web3_url));
+        TransactionManager clientTransactionManager=new ClientTransactionManager(web3j,accountaddress) ;
+        ContractGasProvider contractGasProvider=new DefaultGasProvider();
+        return  UserAllView.load(User_address,web3j,clientTransactionManager,contractGasProvider.getGasPrice(),contractGasProvider.getGasLimit());
+    }
     public static void main(String[] args) throws IOException {
         Admin web3j= Admin.build(new HttpService("http://192.168.85.134:8545"));
         NewAccountIdentifier newAccountIdentifier=web3j.personalNewAccount("22345678").send();

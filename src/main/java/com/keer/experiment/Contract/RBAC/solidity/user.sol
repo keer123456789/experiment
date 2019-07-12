@@ -22,6 +22,7 @@ contract User is Role{
         addToUser[msg.sender].add = msg.sender;
         addToUser[msg.sender].roleName = "root";
         addToUser[msg.sender].userId = "admin";
+
         addToUser[msg.sender].email = "1073441240@qq.com";
         addToUser[msg.sender].fUserId = "root";
         userIdToAddress["admin"] = msg.sender;

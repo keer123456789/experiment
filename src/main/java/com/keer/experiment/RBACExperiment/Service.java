@@ -1,7 +1,7 @@
 package com.keer.experiment.RBACExperiment;
 
-import com.alibaba.fastjson.JSONObject;
-import com.keer.experiment.Contract.RBAC.User;
+import com.keer.experiment.Contract.RBAC.allView.UserAllView;
+import com.keer.experiment.Contract.RBAC.solidity.User;
 import com.keer.experiment.Util.ContractUtil;
 import com.keer.experiment.Util.EthereumUtil;
 import com.keer.experiment.Util.FileUtil;
@@ -238,6 +238,7 @@ public class Service {
             user.addPower(new BigInteger("" + (i)), "" + i, "bihao" + i).send();
             long end = System.currentTimeMillis();
             map.put("addPermission", end - start);
+            logger.info("第"+(i-1)+"次：addPermission:"+(end - start));
 
 
             ethereumUtil.UnlockAccount();
@@ -245,6 +246,7 @@ public class Service {
             user.changePowerInfo(new BigInteger("" + i), "test" + i).send();
             end = System.currentTimeMillis();
             map.put("changePermissionInfo", end - start);
+            logger.info("第"+(i-1)+"次：changePermissionInfo:"+(end - start));
 
 //            ethereumUtil.UnlockAccount();
 //            start = System.currentTimeMillis();
@@ -257,6 +259,7 @@ public class Service {
             Tuple4<BigInteger, String, String, Boolean> tuple4 = user.getPowerInfoBypowerId(new BigInteger("" + i)).send();
             end = System.currentTimeMillis();
             map.put("getPermissionInfo", end - start);
+            logger.info("第"+(i-1)+"次：getPermissionInfo:"+(end - start));
             logger.info("第" + (i - 1) + "次操作，数据：" + tuple4.getValue1().toString() + "," + tuple4.getValue2() + "," + tuple4.getValue3());
 
             ethereumUtil.UnlockAccount();
@@ -342,6 +345,154 @@ public class Service {
         }
         logger.info(time.toString());
         buildTestAllFunction("./TestAllFunction.xls", time);
+    }
+
+    public void testAllFunctionByAllView(int total) throws Exception {
+        UserAllView user = contractUtil.UserAllViewLoad();
+
+        List<String> accounts = new ArrayList<>();
+
+        for (int j = 0; j < total; j++) {
+            String address = ethereumUtil.createNewAccount("12345678");
+            logger.info("创建第"+j+"个账号："+address);
+            accounts.add(address);
+            ethereumUtil.UnlockAccount();
+            BigInteger value = Convert.toWei("50.0", Convert.Unit.ETHER).toBigInteger();
+            user.transfer(address, value).send();
+            logger.info("循环第" + j + "次，转账给：" + address + ",数值：" + value.toString());
+        }
+
+
+        List<Map> time = new ArrayList<>();
+        for (int i = 2; i < (total+2); i++) {
+            UserAllView user1 = contractUtil.UserAllViewLoad(accounts.get(i - 2).toString());
+            Map map = new HashMap();
+
+            ethereumUtil.UnlockAccount();
+            long start = System.currentTimeMillis();
+            user.addPower(new BigInteger("" + (i)), "" + i, "bihao" + i).send();
+            long end = System.currentTimeMillis();
+            map.put("addPermission", end - start);
+            logger.info("第"+(i-1)+"次：addPermission:"+(end - start));
+
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.changePowerInfo(new BigInteger("" + i), "test" + i).send();
+            end = System.currentTimeMillis();
+            map.put("changePermissionInfo", end - start);
+            logger.info("第"+(i-1)+"次：changePermissionInfo:"+(end - start));
+
+//            ethereumUtil.UnlockAccount();
+//            start = System.currentTimeMillis();
+//            user.changePowername(new BigInteger("" + i), "powerName" + i);
+//            end = System.currentTimeMillis();
+//            map.put("changePowerName", end - start);
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            Tuple4<BigInteger, String, String, Boolean> tuple4 = user.getPowerInfoBypowerId(new BigInteger("" + i)).send();
+            end = System.currentTimeMillis();
+            map.put("getPermissionInfo", end - start);
+            logger.info("第"+(i-1)+"次：getPermissionInfo:"+(end - start));
+            logger.info("第" + (i - 1) + "次操作，数据：" + tuple4.getValue1().toString() + "," + tuple4.getValue2() + "," + tuple4.getValue3());
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.createRole(new BigInteger("" + i), "root", "roleName" + i).send();
+            end = System.currentTimeMillis();
+            logger.info("第"+(i-1)+"次：createRole:"+(end - start));
+            map.put("addRole", end - start);
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.changeRoleId("roleName" + i, new BigInteger("" + 1)).send();
+            end = System.currentTimeMillis();
+            logger.info("第"+(i-1)+"次：changeRoleId:"+(end - start));
+            map.put("addPermissionForRole", end - start);
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            Tuple3<List<BigInteger>, String, String> tuple3 = user.getRoleInfo("roleName" + i).send();
+            end = System.currentTimeMillis();
+            map.put("getRoleInfo", end - start);
+            logger.info("第"+(i-1)+"次：getRoleInfo:"+(end - start));
+            logger.info("第" + (i - 1) + "次操作，数据：" + tuple3.getValue1().toString() + "," + tuple3.getValue2() + "," + tuple3.getValue3());
+
+            ethereumUtil.UnlockAccount(accounts.get(i - 2).toString(), "12345678");
+            start = System.currentTimeMillis();
+            user1.registerUser("" + i, "15110074528@163.com").send();
+            end = System.currentTimeMillis();
+            map.put("registerUser", end - start);
+            logger.info("第"+(i-1)+"次：registerUser:"+(end - start));
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.enroll(accounts.get(i - 2).toString(), "roleName" + i, "admin").send();
+            end = System.currentTimeMillis();
+            map.put("enrollUser", end - start);
+            logger.info("第"+(i-1)+"次：enroll:"+(end - start));
+
+
+//            ethereumUtil.UnlockAccount();
+//            start = System.currentTimeMillis();
+//            user.changeEmail(accounts.get(i - 2).toString(), "1073441240@qq.com");
+//            end = System.currentTimeMillis();
+//            map.put("changeEmail", end - start);
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.changeRoleName(accounts.get(i - 2).toString(), "root").send();
+            end = System.currentTimeMillis();
+            map.put("changeUserRole", end - start);
+            logger.info("第"+(i-1)+"次：changeRoleName:"+(end - start));
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.changeUserId(accounts.get(i - 2).toString(), "userName" + i).send();
+            end = System.currentTimeMillis();
+            map.put("changeUserId", end - start);
+            logger.info("第"+(i-1)+"次：changeUserId:"+(end - start));
+            Thread.sleep(5000);
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            Tuple5<String, String, String, String, BigInteger> tuple5 = user.getUserInfo("userName" + i).send();
+            end = System.currentTimeMillis();
+            map.put("getUserAllInfo", end - start);
+            logger.info("查询用户信息：" + tuple5.toString());
+            logger.info("第"+(i-1)+"次：getUserInfo:"+(end - start));
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.changeUnUse(new BigInteger("" + i)).send();
+            end = System.currentTimeMillis();
+            map.put("deletePermission", end - start);
+            logger.info("第"+(i-1)+"次：changeUnUse:"+(end - start));
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            user.deleteUser(accounts.get(i - 2).toString()).send();
+            end = System.currentTimeMillis();
+            map.put("deleteUser", end - start);
+            logger.info("第"+(i-1)+"次：deleteUser:"+(end - start));
+
+
+            ethereumUtil.UnlockAccount();
+            start = System.currentTimeMillis();
+            List list = user.getPower("userName" + i).send();
+            end = System.currentTimeMillis();
+            map.put("getPermissionByUserId", end - start);
+            logger.info("第"+(i-1)+"次：getPowerl:"+(end - start));
+            logger.info("用户：userName" + i + "的权限：" + list.toString());
+            logger.info("第" + (i - 1) + "次循环结束");
+
+
+
+            time.add(map);
+        }
+        logger.info(time.toString());
+        buildTestAllFunction("./TestAllFunctionByAllView.xls", time);
     }
 
     private void buildTestAllFunction(String path, List<Map> list) {

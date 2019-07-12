@@ -1,4 +1,4 @@
-package com.keer.experiment.Contract.RBAC;
+package com.keer.experiment.Contract.RBAC.solidity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
