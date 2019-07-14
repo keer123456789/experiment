@@ -14,6 +14,7 @@ import org.web3j.protocol.admin.JsonRpc2_0Admin;
 import org.web3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.web3j.protocol.admin.methods.response.PersonalListAccounts;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
+import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.JsonRpc2_0Web3j;
 import org.web3j.protocol.core.methods.request.Transaction;
@@ -202,6 +203,24 @@ public class EthereumUtil {
             return false;
         }
     }
+
+    /**
+     * 获得块高
+     * @return
+     * @throws IOException
+     */
+    public int getBlockNumber() throws IOException {
+        Web3j web3j=Web3j.build(new HttpService(web3_url));
+        BigInteger bigInteger=web3j.ethBlockNumber().send().getBlockNumber();
+        return bigInteger.intValue();
+    }
+
+    public int getBlockTranscationNumberByNumber(int blockNumber) throws IOException {
+        Web3j web3j=Web3j.build(new HttpService(web3_url));
+        BigInteger bigInteger=web3j.ethGetBlockTransactionCountByNumber(DefaultBlockParameter.valueOf(new BigInteger(""+blockNumber))).send().getTransactionCount();
+        return bigInteger.intValue();
+    }
+
 
     public static void main(String[] args) throws IOException, CipherException {
         Credentials credentials = WalletUtils.loadCredentials("12345678", "keystore/0x4f35ae6c01aff6b750c1ff6a0404e40a348ca6dd/UTC--2019-03-26T08-59-55.561386305Z--4f35ae6c01aff6b750c1ff6a0404e40a348ca6dd");

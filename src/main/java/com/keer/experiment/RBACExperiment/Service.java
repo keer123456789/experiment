@@ -1,10 +1,12 @@
 package com.keer.experiment.RBACExperiment;
 
+import com.keer.experiment.Contract.RBAC.allView.Power;
 import com.keer.experiment.Contract.RBAC.allView.UserAllView;
 import com.keer.experiment.Contract.RBAC.solidity.User;
 import com.keer.experiment.Util.ContractUtil;
 import com.keer.experiment.Util.EthereumUtil;
 import com.keer.experiment.Util.FileUtil;
+import com.keer.experiment.Util.HttpUtil;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
@@ -12,6 +14,8 @@ import jxl.write.WritableWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
@@ -39,6 +43,9 @@ public class Service {
     EthereumUtil ethereumUtil;
     @Autowired
     FileUtil fileUtil;
+
+    @Value("${account_address}")
+    private String account_address;
 
     public void power() throws Exception {
         User user = contractUtil.UserLoad();
@@ -357,7 +364,7 @@ public class Service {
             logger.info("创建第"+j+"个账号："+address);
             accounts.add(address);
             ethereumUtil.UnlockAccount();
-            BigInteger value = Convert.toWei("50.0", Convert.Unit.ETHER).toBigInteger();
+            BigInteger value = Convert.toWei("10.0", Convert.Unit.ETHER).toBigInteger();
             user.transfer(address, value).send();
             logger.info("循环第" + j + "次，转账给：" + address + ",数值：" + value.toString());
         }
@@ -378,7 +385,7 @@ public class Service {
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.changePowerInfo(new BigInteger("" + i), "test" + i).send();
+            user.changePowerInfo(new BigInteger("" + 1), "test" + i).send();
             end = System.currentTimeMillis();
             map.put("changePermissionInfo", end - start);
             logger.info("第"+(i-1)+"次：changePermissionInfo:"+(end - start));
@@ -426,30 +433,26 @@ public class Service {
             map.put("registerUser", end - start);
             logger.info("第"+(i-1)+"次：registerUser:"+(end - start));
 
-            ethereumUtil.UnlockAccount();
-            start = System.currentTimeMillis();
-            user.enroll(accounts.get(i - 2).toString(), "roleName" + i, "admin").send();
-            end = System.currentTimeMillis();
-            map.put("enrollUser", end - start);
-            logger.info("第"+(i-1)+"次：enroll:"+(end - start));
-
-
 //            ethereumUtil.UnlockAccount();
 //            start = System.currentTimeMillis();
-//            user.changeEmail(accounts.get(i - 2).toString(), "1073441240@qq.com");
+//            user.enroll(accounts.get(i - 2).toString(), "roleName" + i, "admin").send();
 //            end = System.currentTimeMillis();
-//            map.put("changeEmail", end - start);
+//            map.put("enrollUser", end - start);
+//            logger.info("第"+(i-1)+"次：enroll:"+(end - start));
+
+
+
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.changeRoleName(accounts.get(i - 2).toString(), "root").send();
+            user.changeRoleName(account_address, "root"+i).send();
             end = System.currentTimeMillis();
             map.put("changeUserRole", end - start);
             logger.info("第"+(i-1)+"次：changeRoleName:"+(end - start));
 
             ethereumUtil.UnlockAccount();
             start = System.currentTimeMillis();
-            user.changeUserId(accounts.get(i - 2).toString(), "userName" + i).send();
+            user.changeUserId(account_address, "userName" + i).send();
             end = System.currentTimeMillis();
             map.put("changeUserId", end - start);
             logger.info("第"+(i-1)+"次：changeUserId:"+(end - start));
@@ -470,12 +473,12 @@ public class Service {
             map.put("deletePermission", end - start);
             logger.info("第"+(i-1)+"次：changeUnUse:"+(end - start));
 
-            ethereumUtil.UnlockAccount();
-            start = System.currentTimeMillis();
-            user.deleteUser(accounts.get(i - 2).toString()).send();
-            end = System.currentTimeMillis();
-            map.put("deleteUser", end - start);
-            logger.info("第"+(i-1)+"次：deleteUser:"+(end - start));
+//            ethereumUtil.UnlockAccount();
+//            start = System.currentTimeMillis();
+//            user.deleteUser(accounts.get(i - 2).toString()).send();
+//            end = System.currentTimeMillis();
+//            map.put("deleteUser", end - start);
+//            logger.info("第"+(i-1)+"次：deleteUser:"+(end - start));
 
 
             ethereumUtil.UnlockAccount();
@@ -591,13 +594,29 @@ public class Service {
         }
     }
 
+    @Async("asyncServiceExecutor")
+    public void executeAsync() {
+        logger.info("start executeAsync");
+        try{
+            send();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        logger.info("end executeAsync");
+    }
+
+    private void send() throws Exception {
+        BigInteger value = Convert.toWei("0.01", Convert.Unit.ETHER).toBigInteger();
+        User user=contractUtil.UserLoad();
+        user.transfer("0x57fe57ad5a5e7ea0fb7b4b7c0a403789bc869908",value).send();
+    }
     private void buildPowerExecl(String path, Map map) {
         File file = new File(path);
-        if (file.exists()) {
-            file.delete();
-        }
         try {
-            file.createNewFile();
+            file.createNewFile();        if (file.exists()) {
+                file.delete();
+            }
+
 
             WritableWorkbook writableWorkbook = Workbook.createWorkbook(file);
             WritableSheet sheet = writableWorkbook.createSheet("sheet1", 0);
@@ -636,6 +655,7 @@ public class Service {
     public static void main(String[] args) throws Exception {
 
         Web3j web3j = Web3j.build(new HttpService("http://192.168.1.115:8545"));
+
         TransactionManager clientTransactionManager = new ClientTransactionManager(web3j, "0x09c448ddc837817d0a9e2d2212056a66ac710c6e");
         ContractGasProvider contractGasProvider = new DefaultGasProvider();
         User user = User.load("0x39c25682cd21b304c0bcafb93a07eb2ce324a014", web3j, clientTransactionManager, contractGasProvider.getGasPrice(), contractGasProvider.getGasLimit());

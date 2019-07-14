@@ -2,6 +2,7 @@ package com.keer.experiment.Util;
 
 
 import com.keer.experiment.Contract.PIG.Pig;
+import com.keer.experiment.Contract.RBAC.allView.Power;
 import com.keer.experiment.Contract.RBAC.allView.UserAllView;
 import com.keer.experiment.Contract.RBAC.solidity.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,6 +73,20 @@ public class ContractUtil {
         TransactionManager clientTransactionManager=new ClientTransactionManager(web3j,accountaddress) ;
         ContractGasProvider contractGasProvider=new DefaultGasProvider();
         return  UserAllView.load(User_address,web3j,clientTransactionManager,contractGasProvider.getGasPrice(),contractGasProvider.getGasLimit());
+    }
+
+    public Power PowerLoad(){
+        Web3j web3j=Web3j.build(new HttpService(web3_url));
+        TransactionManager clientTransactionManager=new ClientTransactionManager(web3j,account_address) ;
+        ContractGasProvider contractGasProvider=new DefaultGasProvider();
+        return  Power.load(User_address,web3j,clientTransactionManager,contractGasProvider.getGasPrice(),contractGasProvider.getGasLimit());
+    }
+
+    public Power PowerLoad(String accountaddress){
+        Web3j web3j=Web3j.build(new HttpService(web3_url));
+        TransactionManager clientTransactionManager=new ClientTransactionManager(web3j,accountaddress) ;
+        ContractGasProvider contractGasProvider=new DefaultGasProvider();
+        return  Power.load(User_address,web3j,clientTransactionManager,contractGasProvider.getGasPrice(),contractGasProvider.getGasLimit());
     }
     public static void main(String[] args) throws IOException {
         Admin web3j= Admin.build(new HttpService("http://192.168.85.134:8545"));
